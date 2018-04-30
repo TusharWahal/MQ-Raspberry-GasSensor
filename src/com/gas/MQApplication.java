@@ -9,22 +9,32 @@ public class MQApplication {
 	    
 		System.out.println("Press CTRL+C to abort.");
 
-		short mq2Channel = 0;
-		double mq2RoClean = 4.4;
-		int mq2RL = 20;
-		MQ mq2;
+		short mq4Channel = 0;
+		double mq4RoClean = 4.4;
+		int mq4RL = 20;
+		MQ mq4;
+		
+		short mq135Channel = 1;
+		double mq135RoClean = 3.65;
+		int mq135RL = 20;
+		MQ mq135;
+		
 		try {
-			mq2 = new MQ(mq2Channel, mq2RoClean, mq2RL);
-
+			mq4 = new MQ(mq4Channel, mq4RoClean, mq4RL);
+			mq135= new MQ(mq135Channel,mq135RoClean,mq135RL);
+			
 			while (true) {
 
-				Map<String, Double> mq2GasValueMap = mq2.getMQValues();
+				Map<String, Double> mq4GasValueMap = mq4.getMQValues();
+				Map<String, Double> mq135GasValueMap = mq135.getMQValues();
 				System.out.println("\r");
 				System.out.println("\033[K");
-				System.out.println("CO: " + (mq2GasValueMap.get("CO")) + " ppm");
+				System.out.println("CO: " + (mq4GasValueMap.get("CO")) + " ppm");
+				System.out.println("LPG: " + (mq135GasValueMap.get("LPG")) + " ppm");
+
 				System.out.flush();
 				
-				if (mq2GasValueMap.get("CO") > 111) {
+				if (mq4GasValueMap.get("CO") > 111) {
 					//TODO alert();
 					System.out.println("Alert Function");
 				}
